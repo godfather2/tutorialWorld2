@@ -1,0 +1,15 @@
+{
+    "id" : "tutorialWorld2",
+    "version" : "0.1.0-SNAPSHOT",
+    "author" : "",
+    "displayName" : "tutorialWorld2",
+    "description" : "",
+    "dependencies" : [{
+    "id":"Core",
+    "minVersion" : "2.2.1-SNAPSHOT"
+    },
+    {
+    "id":"CoreBlocks",
+    "minVersion":"1.0.0"}],
+    "serverSideOnly" : false
+}
