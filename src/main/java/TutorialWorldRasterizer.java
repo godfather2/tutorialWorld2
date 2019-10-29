@@ -1,5 +1,3 @@
-import org.terasology.world.generation.WorldRasterizer;
-
 /*
  * Copyright 2019 MovingBlocks
  *
@@ -15,17 +13,29 @@ import org.terasology.world.generation.WorldRasterizer;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import org.terasology.math.ChunkMath;
+import org.terasology.math.geom.Vector3i;
+import org.terasology.registry.CoreRegistry;
+import org.terasology.world.block.Block;
+import org.terasology.world.block.BlockManager;
+import org.terasology.world.chunks.CoreChunk;
+import org.terasology.world.generation.Region;
+import org.terasology.world.generation.WorldRasterizer;
+
 public class TutorialWorldRasterizer implements WorldRasterizer {
+    private Block dirt;
     @Override
     public void initialize(){
-
+        dirt = CoreRegistry.get(BlockManager.class).getBlock("CoreBlocks:Dirt");
     }
+
     @Override
-    public void generateChunk(CoreChunk chunk,Region chunkRegion){
-   for(Vector3i position:chunkRegion.getRegion()){
-       if(position.y<0){
-           chunk.setBlock(ChunkMath.calcBlockPos(position),dirt);
-       }
-   }
+    public void generateChunk(CoreChunk chunk, Region chunkRegion){
+        for(Vector3i position:chunkRegion.getRegion()){
+            if(position.y < 0){
+                chunk.setBlock(ChunkMath.calcBlockPos(position), dirt);
+            }
+        }
     }
 }
