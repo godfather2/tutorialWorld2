@@ -22,6 +22,8 @@ import org.terasology.world.block.BlockManager;
 import org.terasology.world.chunks.CoreChunk;
 import org.terasology.world.generation.Region;
 import org.terasology.world.generation.WorldRasterizer;
+import org.terasology.world.generation.facets.SurfaceHeightFacet;
+import org.terasology.world.generation.facets.base.BaseBooleanFieldFacet2D;
 
 public class TutorialWorldRasterizer implements WorldRasterizer {
     private Block dirt;
@@ -33,7 +35,9 @@ public class TutorialWorldRasterizer implements WorldRasterizer {
     @Override
     public void generateChunk(CoreChunk chunk, Region chunkRegion){
         for(Vector3i position:chunkRegion.getRegion()){
-            if(position.y < 0){
+            SurfaceHeightFacet surfaceHeightFacet=chunkRegion.getFacet(SurfaceHeightFacet.class);
+            float surfaceHeight=surfaceHeightFacet.getWorld(position.x,position.z);
+            if(position.y < surfaceHeight){
                 chunk.setBlock(ChunkMath.calcBlockPos(position), dirt);
             }
         }
