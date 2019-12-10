@@ -21,7 +21,8 @@ import org.terasology.world.generation.facets.SurfaceHeightFacet;
  * limitations under the License.
  */
 @Produces(HouseFacet.class)
-@Requires(@Facet(SurfaceHeightFacet.class))
+@Requires(@Facet(value=SurfaceHeightFacet.class,border=@FacetBorder(sides=4)))
+//@Requires(@Facet(SurfaceHeightFacet.class))
 public class HouseProvider implements FacetProvider {
     private Noise noise;
     @Override
@@ -39,7 +40,7 @@ public class HouseProvider implements FacetProvider {
             for(int wx=worldRegion.minX();wx<=worldRegion.maxX();wx++){
                 int surfaceHeight= TeraMath.floorToInt(surfaceHeightFacet.getWorld(wx,wz));
                 if(surfaceHeight>=facet.getWorldRegion().minY() && surfaceHeight<=facet.getWorldRegion().maxY()){
-                    if(noise.noise(wx,wz)>0.99){
+                    if(noise.noise(wx,wz)>0.993){
                         facet.setWorld(wx,surfaceHeight,wz,new House());
                     }
 

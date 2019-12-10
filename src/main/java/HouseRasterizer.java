@@ -13,7 +13,7 @@ import org.terasology.world.generation.Region;
 import org.terasology.world.generation.WorldRasterizer;
 
 import javax.swing.*;
-import java.util.Map;
+import java.util.Map.Entry;
 
 /*
  * Copyright 2019 MovingBlocks
@@ -34,16 +34,17 @@ public class HouseRasterizer implements WorldRasterizer {
     private Block stone;
     @Override
     public void initialize() {
-        stone= CoreRegistry.get(BlockManager.class).getBlock("Core:Stone");
+        stone= CoreRegistry.get(BlockManager.class).getBlock("CoreBlocks:Stone");
     }
 
     @Override
     public void generateChunk(CoreChunk chunk, Region chunkRegion) {
         HouseFacet houseFacet=chunkRegion.getFacet(HouseFacet.class);
-        for(Map.Entry<BaseVector3i,House> entry:houseFacet.getWorldEntries().entrySet()){
+        for(Entry<BaseVector3i,House> entry:houseFacet.getWorldEntries().entrySet()){
             Vector3i centerHousePosition=new Vector3i(entry.getKey());
             int extent=entry.getValue().getExtent();
             centerHousePosition.add(0,extent,0);
+            //centerHousePosition.add(0,-extent+2,0);
             Region3i walls=Region3i.createFromCenterExtents(centerHousePosition,extent);
             Region3i inside=Region3i.createFromCenterExtents(centerHousePosition,extent-1);
 

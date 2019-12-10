@@ -15,6 +15,6 @@
  */
 public class House {
     public int getExtent(){
-        return 4;
+        return 2;
     }
 }
